@@ -1,0 +1,27 @@
+{
+  "name": "s3fs",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "keywords": [
+    "aws",
+    "s3",
+    "fs"
+  ],
+  "author": "Roman Isaev",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.130.0",
+    "@aws-sdk/credential-providers": "^3.130.0",
+    "dotenv": "^16.0.1",
+    "install": "^0.13.0",
+    "npm": "^8.14.0"
+  }
+}
