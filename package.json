@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.mjs",
-    "lint:fix": "eslint --fix ./*.mjs"
+    "lint:fix": "eslint --fix ./**/*.mjs"
   },
   "repository": {
     "type": "git",
