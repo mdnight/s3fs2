@@ -1,8 +1,8 @@
 'use strict'
 
 import * as dotenv from 'dotenv'
-import S3Client from './lib/client.mjs'
-import S3Fs from './lib/s3fs.mjs'
+import S3Client from './lib/s3-client.mjs'
+import S3Fs from './lib/s3-fs.mjs'
 import { createReadStream } from 'fs'
 import { fromEnv } from '@aws-sdk/credential-providers'
 import { env } from 'process'
