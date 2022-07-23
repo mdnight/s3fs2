@@ -7,6 +7,7 @@
     "test": "mocha test/**/*.mjs -r esm",
     "start": "node index.mjs",
     "debug": "node inspect index.mjs",
+    "lint": "eslint ./**/*.mjs"
     "lint:fix": "eslint --fix ./**/*.mjs"
   },
   "engines": {
