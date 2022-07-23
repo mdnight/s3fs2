@@ -1,12 +1,13 @@
 {
   "name": "s3fs",
+  "type": "module",
   "version": "0.0.1",
   "description": "",
   "scripts": {
     "test": "mocha test/**/*.mjs -r esm",
     "start": "node index.mjs",
     "debug": "node inspect index.mjs",
-    "lint": "eslint ./**/*.mjs"
+    "lint": "eslint ./**/*.mjs",
     "lint:fix": "eslint --fix ./**/*.mjs"
   },
   "engines": {
