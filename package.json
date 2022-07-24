@@ -7,8 +7,8 @@
     "test": "mocha test/**/*.mjs -r esm",
     "start": "node index.mjs",
     "debug": "node inspect index.mjs",
-    "lint": "eslint ./**/*.mjs",
-    "lint:fix": "eslint --fix ./**/*.mjs"
+    "lint": "eslint ./lib/**/*.mjs ./test/**/*.mjs",
+    "lint:fix": "eslint --fix ./lib/**/*.mjs ./test/**/*.mjs"
   },
   "engines": {
     "node": ">=16.15.0",
