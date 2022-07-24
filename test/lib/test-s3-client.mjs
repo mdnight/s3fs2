@@ -63,9 +63,11 @@ describe('lib/s3-client', function () {
     })
 
     it('should return something if bucket is not found', async function () {
+      this.skip()
     })
 
     it('should return something overall is wrong', async function () {
+      this.skip()
     })
   })
 
@@ -75,23 +77,23 @@ describe('lib/s3-client', function () {
     })
 
     it('should upload part', async function () {
-
+      this.skip()
     })
 
     it('should throw an exception if uploadId is undefined', async function () {
-
+      this.skip()
     })
 
     it('should throw an exception if buffer is undefined', async function () {
-
+      this.skip()
     })
 
     it('should throw an exception if key is undefined', async function () {
-
+      this.skip()
     })
 
     it('should throw an exception if partNumber is undefined', async function () {
-
+      this.skip()
     })
   })
 
@@ -101,19 +103,19 @@ describe('lib/s3-client', function () {
     })
 
     it('should complete multipart upload', async function () {
-
+      this.skip()
     })
 
     it('should throw an exception if uploadId is undefined', async function () {
-
+      this.skip()
     })
 
     it('should throw an exception if key is undefined', async function () {
-
+      this.skip()
     })
 
     it('should throw an exception if partNumber is undefined', async function () {
-
+      this.skip()
     })
   })
 
@@ -123,15 +125,15 @@ describe('lib/s3-client', function () {
     })
 
     it('should abort multipart upload', async function () {
-
+      this.skip()
     })
 
     it('should throw an exception if uploadId is undefined', async function () {
-
+      this.skip()
     })
 
     it('should throw an exception if key is undefined', async function () {
-
+      this.skip()
     })
   })
 
@@ -141,15 +143,14 @@ describe('lib/s3-client', function () {
     })
 
     it('should return a list of objects', async function () {
-
+      this.skip()
     })
 
     it('should throw an exception if prefix is invalid', async function () {
-
+      this.skip()
     })
 
-    it('should throw an exception if marker is invalid', async function () {
-
+    it.skip('should throw an exception if marker is invalid', async function () {
     })
   })
 })
