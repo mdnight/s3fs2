@@ -61,5 +61,95 @@ describe('lib/s3-client', function () {
       const uploadId = await client.createMultipartUpload('key')
       assert.equal(uploadId, '123')
     })
+
+    it('should return something if bucket is not found', async function () {
+    })
+
+    it('should return something overall is wrong', async function () {
+    })
+  })
+
+  describe('uploadPart', async function () {
+    afterEach(function () {
+      sinon.reset()
+    })
+
+    it('should upload part', async function () {
+
+    })
+
+    it('should throw an exception if uploadId is undefined', async function () {
+
+    })
+
+    it('should throw an exception if buffer is undefined', async function () {
+
+    })
+
+    it('should throw an exception if key is undefined', async function () {
+
+    })
+
+    it('should throw an exception if partNumber is undefined', async function () {
+
+    })
+  })
+
+  describe('completeMultipartUpload', async function () {
+    afterEach(function () {
+      sinon.reset()
+    })
+
+    it('should complete multipart upload', async function () {
+
+    })
+
+    it('should throw an exception if uploadId is undefined', async function () {
+
+    })
+
+    it('should throw an exception if key is undefined', async function () {
+
+    })
+
+    it('should throw an exception if partNumber is undefined', async function () {
+
+    })
+  })
+
+  describe('abortMultipartUpload', async function () {
+    afterEach(function () {
+      sinon.reset()
+    })
+
+    it('should abort multipart upload', async function () {
+
+    })
+
+    it('should throw an exception if uploadId is undefined', async function () {
+
+    })
+
+    it('should throw an exception if key is undefined', async function () {
+
+    })
+  })
+
+  describe('listObjects', async function () {
+    afterEach(function () {
+      sinon.reset()
+    })
+
+    it('should return a list of objects', async function () {
+
+    })
+
+    it('should throw an exception if prefix is invalid', async function () {
+
+    })
+
+    it('should throw an exception if marker is invalid', async function () {
+
+    })
   })
 })
