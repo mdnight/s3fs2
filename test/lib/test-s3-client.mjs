@@ -46,28 +46,54 @@ describe('lib/s3-client', function () {
   })
 
   describe('createMultipartUpload', async function () {
+    beforeEach(function () {
+      this.client = new Client('region', 'bucket')
+    })
+
     afterEach(function () {
       sinon.reset()
     })
 
     it('should create multipart upload and return uploadId', async function () {
-      const client = new Client('region', 'bucket')
-      const stub = sinon.stub(client._client, 'send')
+      const stub = sinon.stub(this.client._client, 'send')
       stub.returns({
         UploadId: '123',
         ETag: 'qwerty',
       })
 
-      const uploadId = await client.createMultipartUpload('key')
+      const uploadId = await this.client.createMultipartUpload('key')
       assert.equal(uploadId, '123')
     })
 
-    it('should return something if bucket is not found', async function () {
-      this.skip()
+    const invalidArgument = [
+      { it: 'empty string', value: '' },
+      { it: 'null', value: null },
+      { it: 'undefined', value: undefined },
+    ]
+    invalidArgument.forEach(function (run) {
+      it(`should throw an exception if key is ${run.it}`, async function () {
+        try {
+          await this.client.createMultipartUpload(run.value)
+        } catch (e) {
+          assert.equal(e.message, 'key is not provided')
+          return
+        }
+        assert.fail('exception is not thrown')
+      })
     })
 
-    it('should return something overall is wrong', async function () {
-      this.skip()
+    it('should throw exception if .send() is failed', async function () {
+      const stub = sinon.stub(this.client._client, 'send')
+      stub.returns({
+        UploadId: undefined
+      })
+      try {
+        await this.client.createMultipartUpload('key')
+      } catch (e) {
+        assert.ok(true)
+        return
+      }
+      assert.fail('exception is not thrown')
     })
   })
 
