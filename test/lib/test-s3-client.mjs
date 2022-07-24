@@ -2,7 +2,6 @@
 
 import assert from 'assert'
 import sinon from 'sinon'
-import { S3Client } from '@aws-sdk/client-s3'
 
 import Client from '../../lib/s3-client.mjs'
 
