@@ -5,6 +5,7 @@
   "description": "",
   "scripts": {
     "test": "mocha test/**/*.mjs -r esm",
+    "test:debug": "mocha --inspect-brk test/**/*.mjs -r esm",
     "start": "node index.mjs",
     "debug": "node inspect index.mjs",
     "lint": "eslint ./lib/**/*.mjs ./test/**/*.mjs",
