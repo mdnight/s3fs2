@@ -60,5 +60,64 @@ describe('lib/s3-client', function () {
         assert.equal(e.message, 'uploadId not defined. Have you called "start" method after you created this object?')
       }
     })
+
+    it('should select multipart upload if chunk is greater than 20MB', async function () {
+      const stub = sinon.createStubInstance(Client, {
+        createMultipartUpload: sinon.stub().withArgs('key').resolves('key'),
+        uploadPart: sinon.stub().resolves({ ETag: '"qwerty123456qwerty"' })
+      })
+      const stream = new S3WriteStream(stub, 'key', {})
+      await stream.start()
+
+      let callbackHasBeenCalled = false
+      let error
+      const cb = (err) => {
+        callbackHasBeenCalled = true
+        error = err
+      }
+
+      stream._write(
+        Buffer.from('a'.repeat(1024 * 1024 * 20)),
+        'utf8',
+        cb
+      )
+
+      await new Promise((resolve, reject) => setTimeout(resolve, 100))
+
+      assert.equal(callbackHasBeenCalled, true)
+      assert.equal(error, undefined)
+      assert.equal(stream._promises.length, 1)
+      assert.equal(stream._uploadedParts.length, 1)
+
+      assert.equal(stream._uploadedParts[0].ETag, 'qwerty123456qwerty')
+      assert.equal(stream._uploadedParts[0].PartNumber, 1)
+    })
+
+    it('should return error in callback if multipart uploading failed', async function () {
+      const stub = sinon.createStubInstance(Client, {
+        createMultipartUpload: sinon.stub().withArgs('key').resolves('key'),
+        uploadPart: sinon.stub().rejects('something fatal')
+      })
+      const stream = new S3WriteStream(stub, 'key', {})
+      await stream.start()
+
+      let callbackHasBeenCalled = false
+      let error
+      const cb = (err) => {
+        callbackHasBeenCalled = true
+        error = err
+      }
+
+      stream._write(
+        Buffer.from('a'.repeat(1024 * 1024 * 20)),
+        'utf8',
+        cb
+      )
+
+      await new Promise((resolve, reject) => setTimeout(resolve, 100))
+
+      assert.equal(callbackHasBeenCalled, true)
+      assert.equal(error, 'something fatal')
+    })
   })
 })
