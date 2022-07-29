@@ -38,7 +38,7 @@ describe('lib/s3-client', function () {
     })
   })
 
-  describe('_write (multipart)', function () {
+  describe('_write', function () {
     it('should throw an exception if uploadId is not defined', function () {
       const writeStream = new S3WriteStream('client', 'key', {})
 
@@ -118,6 +118,37 @@ describe('lib/s3-client', function () {
 
       assert.equal(callbackHasBeenCalled, true)
       assert.equal(error, 'something fatal')
+    })
+  })
+
+  describe('end', function () {
+    it('can upload file (normal)', async function () {
+      const mock = sinon.mock(Client.prototype)
+      mock.expects('createMultipartUpload').usingPromise(Promise).once().resolves('uploadId')
+      mock.expects('uploadNormally').usingPromise(Promise).once().resolves()
+      mock.expects('abortMultipartUpload').usingPromise(Promise).once().resolves()
+
+      const stream = new S3WriteStream(new Client('region', 'bucket'), 'key', {})
+      await stream.start()
+
+      let callbackHasBeenCalled = false
+      let error
+      const cb = (err) => {
+        callbackHasBeenCalled = true
+        error = err
+      }
+
+      stream.end(
+        Buffer.from('a'.repeat(1024 * 1024 * 2)),
+        'utf8',
+        cb
+      )
+
+      await new Promise((resolve, reject) => setTimeout(resolve, 100))
+
+      mock.verify()
+      assert.equal(callbackHasBeenCalled, true)
+      assert.equal(error, undefined)
     })
   })
 })
